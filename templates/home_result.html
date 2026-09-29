@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PocketSmart AI - Home Recommendation</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8f9ff);
+            color: #222;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5b4bdb;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-icon {
+            font-size: 55px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #5b4bdb, #806cff);
+            color: white;
+
+            padding: 25px;
+            border-radius: 20px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+            box-shadow: 0 8px 25px rgba(91,75,219,0.22);
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-item span {
+            display: block;
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 7px;
+        }
+
+        .summary-item strong {
+            font-size: 18px;
+        }
+
+        .recommendation-card {
+            background: white;
+            padding: 32px;
+
+            border-radius: 22px;
+
+            box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+
+            margin-bottom: 25px;
+        }
+
+        .recommendation-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            color: #5b4bdb;
+
+            margin-bottom: 20px;
+        }
+
+        .recommendation {
+            white-space: pre-wrap;
+            line-height: 1.75;
+            color: #444;
+            font-size: 15px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 10px;
+
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #5b4bdb;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #4939c7;
+        }
+
+        .secondary {
+            background: white;
+            color: #5b4bdb;
+            border: 1px solid #ddd;
+        }
+
+        .secondary:hover {
+            background: #f5f3ff;
+        }
+
+        .note {
+            margin-top: 25px;
+
+            padding: 16px;
+
+            background: #f5f3ff;
+            border-radius: 12px;
+
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 18px 25px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation-card {
+                padding: 24px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            💰 PocketSmart AI
+        </div>
+
+        <a class="back" href="/dashboard">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="header-icon">
+                🏠
+            </div>
+
+            <h1>
+                Home Recommendation
+            </h1>
+
+            <p>
+                Your personalized budget plan is ready!
+            </p>
+
+        </div>
+
+
+        <div class="summary">
+
+            <div class="summary-item">
+
+                <span>💰 Budget</span>
+
+                <strong>
+                    ₹{{ budget }}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>🏠 Room Type</span>
+
+                <strong>
+                    {{ room_type }}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>🛒 Items</span>
+
+                <strong>
+                    {{ items|join(", ") if items else "General" }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="recommendation-card">
+
+            <div class="recommendation-title">
+
+                ✨ AI Recommendation
+
+            </div>
+
+
+            <div class="recommendation">
+
+                {{ recommendations }}
+
+            </div>
+
+
+            <div class="note">
+
+                💡 <strong>Note:</strong>
+                Prices shown are approximate and may vary depending
+                on brand, store, location and current market prices.
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a class="button primary" href="/home">
+                🔄 Plan Again
+            </a>
+
+            <a class="button secondary" href="/history">
+                📜 View History
+            </a>
+
+            <a class="button secondary" href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

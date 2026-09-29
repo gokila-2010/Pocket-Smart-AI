@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PocketSmart AI - Party Planner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff1f8, #f7f4ff);
+            color: #222;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d14d8b;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .icon {
+            font-size: 55px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .field {
+            margin-bottom: 24px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 9px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #d14d8b;
+        }
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            background: #d14d8b;
+            color: white;
+            padding: 15px;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background: #b83d75;
+        }
+
+        .tip {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff2f8;
+            border-radius: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 18px 25px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">💰 PocketSmart AI</div>
+
+        <a class="back" href="/dashboard">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="icon">🎉</div>
+
+            <h1>Party Planner</h1>
+
+            <p>
+                Plan your event smartly with a budget-friendly AI recommendation.
+            </p>
+        </div>
+
+        <div class="form-card">
+
+            <form action="/generate-party" method="post">
+
+                <div class="field">
+                    <label for="budget">💰 Your Budget</label>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        name="budget"
+                        placeholder="Example: 30000"
+                        min="1"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="guest_count">👥 Number of Guests</label>
+
+                    <input
+                        type="number"
+                        id="guest_count"
+                        name="guest_count"
+                        placeholder="Example: 50"
+                        min="1"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="event_type">🎂 Event Type</label>
+
+                    <select id="event_type" name="event_type" required>
+                        <option value="">Select event type</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Engagement">Engagement</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Family Function">Family Function</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+                    <label for="venue">📍 Venue</label>
+
+                    <select id="venue" name="venue" required>
+                        <option value="">Select venue</option>
+                        <option value="Home">Home</option>
+                        <option value="Hall">Hall</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="Outdoor">Outdoor</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    ✨ Generate AI Recommendation
+                </button>
+
+            </form>
+
+
+            <div class="tip">
+                💡 <strong>Tip:</strong>
+                Enter the number of guests and your total budget. PocketSmart AI will create an estimated plan for catering, decoration and entertainment.
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PocketSmart AI - Jewelry Planner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff8e8, #f8f4ff);
+            color: #222;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #9a6b00;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .icon {
+            font-size: 55px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .field {
+            margin-bottom: 24px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 9px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #b8860b;
+        }
+
+        .upload-box {
+            border: 2px dashed #d6c08a;
+            padding: 22px;
+            border-radius: 12px;
+            background: #fffaf0;
+        }
+
+        .upload-box input {
+            border: none;
+            padding: 5px 0;
+            background: transparent;
+        }
+
+        .upload-note {
+            margin-top: 8px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            background: #b8860b;
+            color: white;
+            padding: 15px;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background: #967000;
+        }
+
+        .tip {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff8e8;
+            border-radius: 10px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 18px 25px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">💰 PocketSmart AI</div>
+
+        <a class="back" href="/dashboard">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="icon">💍</div>
+
+            <h1>Jewelry Planner</h1>
+
+            <p>
+                Get jewelry recommendations based on your budget, occasion and style.
+            </p>
+        </div>
+
+        <div class="form-card">
+
+            <form
+                action="/generate-jewelry"
+                method="post"
+                enctype="multipart/form-data"
+            >
+
+                <div class="field">
+                    <label for="budget">💰 Your Budget</label>
+
+                    <input
+                        type="number"
+                        id="budget"
+                        name="budget"
+                        placeholder="Example: 20000"
+                        min="1"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="occasion">🎊 Occasion</label>
+
+                    <select id="occasion" name="occasion" required>
+                        <option value="">Select occasion</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Engagement">Engagement</option>
+                        <option value="Party">Party</option>
+                        <option value="Festival">Festival</option>
+                        <option value="Daily Wear">Daily Wear</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+                    <label for="style">✨ Jewelry Style</label>
+
+                    <select id="style" name="style" required>
+                        <option value="">Select style</option>
+                        <option value="Traditional">Traditional</option>
+                        <option value="Modern">Modern</option>
+                        <option value="Minimal">Minimal</option>
+                        <option value="Bridal">Bridal</option>
+                    </select>
+                </div>
+
+
+                <div class="field">
+
+                    <label for="outfit_image">
+                        📷 Upload Outfit Image
+                    </label>
+
+                    <div class="upload-box">
+
+                        <input
+                            type="file"
+                            id="outfit_image"
+                            name="outfit_image"
+                            accept="image/*"
+                        >
+
+                        <p class="upload-note">
+                            Optional: Upload your outfit image for outfit-based jewelry suggestions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    ✨ Generate AI Recommendation
+                </button>
+
+            </form>
+
+
+            <div class="tip">
+                💡 <strong>Tip:</strong>
+                You can upload an outfit image, but it is optional. Your recommendation can also be generated using your budget, occasion and selected style.
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
